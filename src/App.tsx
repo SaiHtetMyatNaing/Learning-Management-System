@@ -1,12 +1,16 @@
 import React from 'react'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import AdminDashboard from './components/dashboard/admin-dashboard'
+import { Toaster } from './components/ui/toaster'
 
-
+const queryClient = new QueryClient()
 const App = () => {
+
   return (
-    <div className='mx-auto flex items-center my-[15em] max-h-dvh max-w-lg justify-between'>
-       <img src='src/assets/lms.png' className='max-w-sm'/>
-       <h1 className='text-[2em] font-mono'>Ready For The Adventure?</h1>
-    </div>
+    <QueryClientProvider  client={queryClient}>
+        <Toaster/>
+        <AdminDashboard/>
+    </QueryClientProvider>
   )
 }
 
