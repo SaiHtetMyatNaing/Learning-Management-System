@@ -18,7 +18,7 @@ import {
 import { useToast } from "../ui/use-toast";
 import { Button } from "../ui/button";
 import { dataProps } from "@/lib/type";
-import { constructionRoles } from "@/lib/data";
+import { sortedRole } from "@/lib/data";
 import { Checkbox } from "../ui/checkbox";
 
 export const items = [
@@ -29,24 +29,26 @@ export const items = [
 
 // table column defination
 export const columns: ColumnDef<dataProps>[] = [
-   {
-      id: 'select' , 
-      header : ({ table }) => {
-       return <Checkbox
-         checked={table.getIsAllPageRowsSelected()}
-         onCheckedChange={(value)=> table.toggleAllPageRowsSelected(!!value)} // double exclamation toggle the boolean value
+  {
+    id: "select",
+    header: ({ table }) => {
+      return (
+        <Checkbox
+          checked={table.getIsAllPageRowsSelected()}
+          onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)} // double exclamation toggle the boolean value
         />
-      },
-      cell : ( {row} ) => {
-        return (
-            <Checkbox
-             checked={row.getIsSelected()}
-             onCheckedChange={(value) => row.toggleSelected(!!value)}
-            />
-        )
-      },
-      enableSorting : false,
-   },
+      );
+    },
+    cell: ({ row }) => {
+      return (
+        <Checkbox
+          checked={row.getIsSelected()}
+          onCheckedChange={(value) => row.toggleSelected(!!value)}
+        />
+      );
+    },
+    enableSorting: false,
+  },
   //Id Section
   {
     header: ({ column }) => {
@@ -61,7 +63,7 @@ export const columns: ColumnDef<dataProps>[] = [
         </Button>
       );
     },
-    accessorKey: "id",  // We need accessorKey coz , ColumnDef needs it to keep track of the proper place to render (!important)
+    accessorKey: "id", // We need accessorKey coz , ColumnDef needs it to keep track of the proper place to render (!important)
   },
   //Name Section
   {
@@ -96,7 +98,8 @@ export const columns: ColumnDef<dataProps>[] = [
           <DropdownMenuContent>
             <DropdownMenuLabel>Filtered By Role</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            {constructionRoles.map((role) => {
+            {}
+            {sortedRole.map((role) => {
               return (
                 <DropdownMenuItem
                   //Sorting According to Role

@@ -17,6 +17,8 @@ export const constructionRoles : dropDownRoleProps[]= [
     { id: 12, title: 'Construction Worker' },
   ];
 
+export const sortedRole =constructionRoles.sort((a, b) => a.title.localeCompare(b.title));
+
 export const data : dataProps[] = [{"id":1,"name":"Maynard Caso","email":"mcaso0@shinystat.com","role":"Construction Worker","action":true},
     {"id":2,"name":"Whittaker Weben","email":"wweben1@dot.gov","role":"Subcontractor","action":false},
     {"id":3,"name":"Tamarah Tyers","email":"ttyers2@vistaprint.com","role":"Project Manager","action":true},
