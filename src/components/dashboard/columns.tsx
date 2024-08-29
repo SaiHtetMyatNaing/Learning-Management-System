@@ -10,22 +10,15 @@ import {
 import {
   ArrowDown,
   ArrowUpDownIcon,
-  CopyCheckIcon,
-  DeleteIcon,
-  EditIcon,
   MoreHorizontal,
 } from "lucide-react";
-import { useToast } from "../ui/use-toast";
 import { Button } from "../ui/button";
 import { dataProps } from "@/lib/type";
 import { sortedRole } from "@/lib/data";
 import { Checkbox } from "../ui/checkbox";
+import DeleteDialogBox from "./delete-dialog";
+import UserEditDialogBox from "./user-edit-dialog";
 
-export const items = [
-  { id: 3, title: "Copy", icon: <CopyCheckIcon /> },
-  { id: 1, title: "Edit", icon: <EditIcon /> },
-  { id: 2, title: "Delete", icon: <DeleteIcon /> },
-];
 
 // table column defination
 export const columns: ColumnDef<dataProps>[] = [
@@ -125,33 +118,23 @@ export const columns: ColumnDef<dataProps>[] = [
   // Action Section
   {
     id: "actions",
-    cell: ({ row }) => {
-      const mail = row.original.email;
+    cell: ({row}) => {
+      const { original } = row;
       return (
         <DropdownMenu>
           <DropdownMenuTrigger>
             <MoreHorizontal />
           </DropdownMenuTrigger>
           <DropdownMenuContent className="bg-white">
-            {items.map((item) => {
-              const { toast } = useToast();
-              return (
-                <DropdownMenuItem
-                  className="flex gap-4 cursor-pointer hover:bg-gray-400"
-                  key={item.id}
-                  onClick={() => {
-                    navigator.clipboard.writeText(mail);
-                    toast({
-                      variant: "default",
-                      title: `Copied : ${mail}`,
-                    });
-                  }}
-                >
-                  {item.icon}
-                  <span>{item.title}</span>
-                </DropdownMenuItem>
-              );
-            })}
+              {/* Edit User Button */}
+            <DropdownMenuItem onSelect={(e)=> e.preventDefault()}  className="flex items-center w-full gap-3">
+               <UserEditDialogBox name={original.name} email={original.email} role={original.role}/>
+            </DropdownMenuItem>
+
+            {/* Delete Button */}
+            <DropdownMenuItem onSelect={(e)=> e.preventDefault()}>
+              <DeleteDialogBox/>
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
